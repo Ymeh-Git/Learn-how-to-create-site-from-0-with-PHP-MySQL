@@ -10,11 +10,11 @@
 // Définir une variable
 $variable;
 // Définir une constante
-const constante = "Droulez";
+const constante = "Etchebest";
 // OU
 define("constante1", "Jérémy");
 
-$string = "Jérémy Droulez";
+$string = "Jérémy Etchebest";
 $integer = 13;
 $array = [
   "loisir" => "Jeu vidéo",
