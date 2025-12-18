@@ -199,7 +199,7 @@ function addContact(array &$array, string $lastName, string $firstName, string $
 
 // SEARCH FOR A CONTACT
 function searchContact(array $array, string $index, string $content){
-    return array_filter($array, function($array) use ($index, $content){ 
+    return array_filter($array, function($array) use ($index, $content){
         return stripos($array[$index], $content) !== false;
     });
     return false;
@@ -208,16 +208,16 @@ function searchContact(array $array, string $index, string $content){
 
 // UPDATE A CONTACT 
 function updateContact(array &$array, int $index, array $newArray){
-    if (isset($array[$index])){
-        return $array[$index] = array_merge($array[$index], $newArray);
+    if (isset($array[$index])){// Si le sous tableau de mon tableau est déclarée alors
+        return $array[$index] = array_merge($array[$index], $newArray); //On remplace les anciennes données avec nos données dans le sous-tableau
     }
     return false;
 };
 
 // DELETE CONTACT
 function deleteContact(array &$array, int $index){
-    if (isset($array[$index])){
-        unset($array[$index]);
+    if (isset($array[$index])){ // Si le sous tableau de mon tableau est déclarée alors
+        unset($array[$index]); // Bah on l'enlève
         $array = array_values($array); // Permet de réorganiser le tableau
         return true;
     }
