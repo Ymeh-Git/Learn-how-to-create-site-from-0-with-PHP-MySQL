@@ -42,6 +42,12 @@ $database = new PDO("mysql:host=$server;dbname=$dbName;charset=utf8mb4", $user, 
 
 // Notre demande en langage SQL vers la table "books" (considérons la table déjà remplie avec id, name, authors)
 $sql = "SELECT * FROM books";
+// $sql = "SELECT id FROM books";
+// $sql = "SELECT name FROM books";
+// $sql = "SELECT authors FROM books";
+// $sql = "SELECT * FROM books WHERE id = 1";
+// $sql = "SELECT * FROM books WHERE name = 'Inconnu à cette adresse'";
+// $sql = "SELECT * FROM books WHERE authors = 'Victor Hugo'";
 
 // Notre requête à partir de l'entrée en BDD et de notre requête (query = requête)
 $request = $database->query($sql);
@@ -49,22 +55,7 @@ $request = $database->query($sql);
 // Récupérons les résultats de notre requête et mettons les dans un tableau associatif (PDO::FETCH_ASSOC)
 $results = $request->fetchAll(PDO::FETCH_ASSOC);
 
-// Il faut maintenant l'afficher :
-// Ouverture de la liste non ordonnée (ici c'est mon choix)
-echo "<ul>";
-// Il faut boucler sur le résultats et que chaque entrées soient considérées comme $book
-// Bien entendu nous devons utiliser les noms précis de chaque champs dans notre BDD
-foreach($results as $book){
-    echo "<li> ~ ID : ".$book['id'];
-    echo "<ul>";
-    echo "<li> ~~ Nom : ".$book['name']."</li>";
-    echo "<li> ~~ Auteur : ".$book['authors']."</li>";
-    echo "</ul>";
-    echo "</li>";
-    echo "<br><br>";
-}
-// Ne pas oublier de fermer la balise <ul>
-echo "</ul>";
+// Il faut maintenant l'afficher : (SP_8)
 } catch(PDOException $e){
     // En cas d'erreur attrappée, l'afficher : 
     echo "Une erreur est survenue : ".$e->getMessage();
