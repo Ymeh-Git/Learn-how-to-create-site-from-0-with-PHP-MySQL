@@ -83,6 +83,8 @@ foreach($results as $book){
     echo "</ul>";
     echo "</li>";
 }
+// Ne pas oublier de fermer la balise <ul>
+echo "</ul>";
 
 } catch(PDOException $e){
     echo "Une erreur est survenue : ".$e->getMessage();
