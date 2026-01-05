@@ -1,0 +1,119 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html{
+    background-color: grey;
+}
+
+body{
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Body is force to at least be 100% height of the screen */
+    overflow-x: hidden; /* Make horizontal scrolling impossible */
+}
+
+header, footer{
+    background-color: grey;
+    height: 200px;
+    text-align: center;
+    align-content: center;
+}
+
+main{
+    background: black;
+    color : Green;
+    flex: 1; /* Pushs footer down even if the content is short */
+    padding: 35px;
+    width: 90%; 
+    margin: auto; /* This way your main content will be centered */
+}
+
+div{
+    background-color: black;
+    color: white;
+}
+.parent{
+    width: 90%;
+    margin: auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;    
+    flex-wrap: wrap;
+}
+.enfant{
+    background-color: rgb(255, 255, 255);
+    color: white;
+    margin: 20px;
+    width: 350px;
+    border-radius: 15px;
+}
+.enfant label{
+    color: black;
+}
+form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-radius: 15px;
+}
+input, p, label, a{
+    width: 320px;
+    margin: 5px;
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 5px;
+    color: black;
+    background-color: white;
+}
+
+form * {
+    width: 80%;
+    margin: auto;
+    margin-bottom: 15px;
+}
+label {
+    border: none;
+}
+
+.btn-field{
+    background-color: transparent;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+    margin-bottom: 10px;
+}
+.btn-field a, .btn-field input{
+    text-align: center;
+    text-decoration: none;
+    width: 45%;
+    padding: 5px;
+}
+.btn-field .btn{
+    border: none;
+    border-radius: 5px;
+    color: white
+}
+.btn-field .btn:hover{
+    cursor: pointer;
+}
+.btn-field .btn-red{
+    background-color: red;
+    border: 2px solid red;
+}.btn-field .btn-red:hover{
+    background-color: white;
+    color: red;
+    border: 2px solid red;
+}
+.btn-field .btn-info{
+    background-color: rgb(58, 166, 255);
+    border: 2px solid rgb(58, 166, 255);
+}
+.btn-field .btn-info:hover{
+    background-color: white;
+    color: rgb(58, 166, 255);
+    border: 2px solid rgb(58, 166, 255);
+}
