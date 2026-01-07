@@ -18,7 +18,7 @@ $i ++;
     <form action="" method="POST">
         <h2 style="color: black; text-align: center;margin-top: 10px;">recette n°<?= $i?></h2>
         <label>Nom</label>
-        <input type="text" value="<?= $recipe['nom'] ?>">
+        <input type="text" value="<?= $recipe['nom'] ?>" disabled>
         <label>Type de recette</label>
         <?php switch($recipe["categorie_id"]) { 
 
