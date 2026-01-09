@@ -1,0 +1,1 @@
+Bonjour <?= htmlspecialchars($_SESSION['user']['pseudo'])?>
