@@ -1,52 +1,73 @@
 <?php 
-// Tableaux et fonctions
+// Arrays and functions
 
-// - [ X ]  Tableaux indexés et associatifs
-// - [ X ]  Fonctions intégrées (count(), sort())
-// - [ X ]  Création de fonctions personnalisées
-// - [ X ]  **Exercice** : Gestionnaire de contacts en mémoire
+// - [ X ]  Indexed and associative arrays
+// - [ X ]  Built-in function count(), sort()
+// - [ X ]  Creating custom functions
+// - [ X ]  **Exercise** : in-memory contact manager
 
-//Tableau indéxé : 
-$arrayIndexe = ["Philippes", "Jérémy", "Christian", "François", "Matt", "Nathalie"];
+//Indexed array : 
+$indexedArray = ["Philippes", "Jérémy", "Christian", "François", "Matt", "Nathalie"];
 //   index     [     0     ,     1   ,      2     ,     3     ,   4   ,      5    ];
 
-//Tableau associatif : 
-$arrayAssociatif = [
+//asociative array : 
+// associative array which means instead of index [0, 1, 2, ...] you name it "0" become "name", "1" = "age", "2" = "city", ... 
+// you can rename it as you wish
+$associativeArray = [
     "prenomAuPif" => "Philippes", 
     "monPrenom" => "Jérémy", 
     "tonPrenom" => "Christian", 
     "monPere" => "François", 
     "maCopine" => "Matt", 
-    "maMere" => "Nathalie", // Dernière virgule pas obligatoire, mais en cas d'ajout vaut mieux l'avoir.
+    "maMere" => "Nathalie", // The last comma is not mandatory, but it's better to have it if you're adding something with a loop or something like that
 ];
 
 /*   
 
-index associé [  
-    "nomIndex" => "valeurAssocie" 
+index associated [  
+    "indexName" => "valueAssociated" 
 ];
 
 */
 
-// Fonction count()
-echo "<br>";
-echo "Il y a ". count($arrayIndexe)." dans mon tableau \$arrayIndexe";
+// first, echo is built-in langage of PhP which help you display a string in your HTML
+// to add $variables or function() with echo you have to :
 
-// Autre utilisation de count() et strlen() son équivalent pour les string
+// first : write your text 
+// "bla bla bla " 
+
+// secondly : add a dot . after the end of your first sentence (after the second ' " ')
+// "bla bla bla " . $variables
+// "bla bla bla " . function()
+
+// thirdly : add a dot after your variable or variables IF you want to add a new sentence, ELSE no need for a last dot
+// "bla bla bla " . $variables .
+// "bla bla bla " . function() .
+
+// then : open ""
+// "bla bla bla " . $variables . " bla bla"
+// "bla bla bla " . function() . " bla bla"
+
+
+// function count()
+echo "<br>";
+echo "There is ". count($indexedArray)." in my array \$indexedArray";
+
+// Other use of count() and strlen(), they have the same purpose but strlen is for string length
 echo "<br>";
 echo "<br>";
-for($i=0; $i < count($arrayIndexe); $i++){
-    echo "~".$arrayIndexe[$i]." ce prénom possède ".strlen($arrayIndexe[$i])." caractères de long. <br>";
+for($i=0; $i < count($indexedArray); $i++){
+    echo "~".$indexedArray[$i]." ce prénom possède ".strlen($indexedArray[$i])." caractères de long. <br>";
 }
 
-// Fonction sort()
+// function sort()
 echo "<br>";
 
 // ------------------------------
 echo "Tableau avant sort() : [";
-for($i=0; $i < count($arrayIndexe); $i++){
-    echo "\"".$arrayIndexe[$i]."\"";
-    if($i+1 != count($arrayIndexe)){ // Ne pas oublier le "+ 1" car count($arrayIndexe) = 6 alors que $i ira toujours jusqu'à 5, ainsi il ne mettre pas de virgule à la fin.
+for($i=0; $i < count($indexedArray); $i++){
+    echo "\"".$indexedArray[$i]."\"";
+    if($i+1 != count($indexedArray)){ // Don't forget to add 1 to $i since count($indexedArray) = 6, this way there won't be a comma at the end.
         echo", ";
     }
 }
@@ -56,37 +77,37 @@ echo "<br>";
 
 // OU
 
-var_dump($arrayIndexe);
+var_dump($indexedArray);
 echo "<br>";
 echo "<br>";
 // ------------------------------
 // ******************************
-sort($arrayIndexe); // Organisé par ordre alphabétique
+sort($indexedArray); // Organized in alphabetical order
 
 echo "Tableau après sort() : [";
-for($i=0; $i < count($arrayIndexe); $i++){
-    echo "\"".$arrayIndexe[$i]."\"";
-    if($i+1 != count($arrayIndexe)){ // Ne pas oublier le "+ 1" car count($arrayIndexe) = 6 alors que $i ira toujours jusqu'à 5, ainsi il ne mettre pas de virgule à la fin.
+for($i=0; $i < count($indexedArray); $i++){
+    echo "\"".$indexedArray[$i]."\"";
+    if($i+1 != count($indexedArray)){
         echo", ";
     }
 }
 echo "]";
 echo "<br>";
 
-// OU
+// OR
 
-var_dump($arrayIndexe);
+var_dump($indexedArray);
 echo "<br>";
 echo "<br>";
 // ******************************
 
-// Création de fonctions personnalisées
+// Creating custom functions
 
-function afficherTableauEnChaineHTML(array $array){
+function displayArrayStringHTML(array $array){
     echo "[";
     for($i=0; $i < count($array); $i++){
         echo "\"".$array[$i]."\"";
-        if($i+1 != count($array)){ // Ne pas oublier le "+ 1" car count($arrayIndexe) = 6 alors que $i ira toujours jusqu'à 5, ainsi il ne mettre pas de virgule à la fin.
+        if($i+1 != count($array)){
             echo", ";
         }
     }
@@ -94,39 +115,52 @@ function afficherTableauEnChaineHTML(array $array){
 };
 
 $array1 = ["Philippes", "Jérémy", "Christian", "François", "Matt", "Nathalie", "Sylvie", "Marie-ange", "Thierry", "Sandy", "Marie-Françoise", "Alexis", "Mélanie", "Louis"];
-afficherTableauEnChaineHTML($array1);
+
 echo "<br>";
-print_r($array1); // Afficher un tableau différemment
+echo "Array with displayArrayStringHTML(\$array1)";
+echo "<br>";
+displayArrayStringHTML($array1);
+echo "<br>";
+echo "Array with print_r()";
+echo "<br>";
+print_r($array1); // Different way to display an array
 echo "<br>";
 echo "<br>";
 $array2 = [13, 11, 1997, 1, 9, 1967, 16, 1, 1967, 4, 1, 1990, 23, 1, 1992];
 
-afficherTableauEnChaineHTML($array2); // Cependant cela donne un affichage comme si c'était des chaînes de caractères (strings) alors que ce n'est pas le cas
+echo "<br>";
+echo "Array with displayArrayStringHTML(\$array2)";
+echo "<br>";
+displayArrayStringHTML($array2); // This way you'll see an array like numbers are string and not int
 
-// Changeons ça, reprenons la fonction d'avant : 
+// Let's change that :
 echo "<br>";
 function afficherTableauEnNombreHTML(array $array){
     echo "[";
     for($i=0; $i < count($array); $i++){
         echo $array[$i];
-        if($i+1 != count($array)){ // Ne pas oublier le "+ 1" car count($arrayIndexe) = 6 alors que $i ira toujours jusqu'à 5, ainsi il ne mettre pas de virgule à la fin.
+        if($i+1 != count($array)){
             echo", ";
         }
     }
     echo "]<br>";
 };
 
+echo "<br>";
+echo "Array with afficherTableauEnNombreHTML(\$array2)";
+echo "<br>";
 afficherTableauEnNombreHTML($array2);
 echo "<br>";
 print_r($array2);
 echo "<br>";
 echo "<br>";
 
-// **Exercice** : Gestionnaire de contacts en mémoire
-// Ici si je suis l'intitulé, l'objectif est de pouvoir créer, modifier, rechercher et supprimer un contact.
+// **Exercise** : in-memory contact manager
+// Here we need to create, update, search (show) and delete a contact.
+// It's called CRUD (Create Read Update Delete) 
 
 /*
-Exemple de tableau qui permet de stocker nos contacts : 
+Example of an associative array that will store our contacts
 
 $contact = [
     [
@@ -140,7 +174,6 @@ $contact = [
 ];
 
 */
-// Tableau associatif de contact :
 
 $contacts = [
     [
@@ -179,10 +212,11 @@ $contacts = [
         "phoneNumber" => "06 07 10 09 08",
     ],
 ];
+
 // ADD A CONTACT
-function addContact(array &$array, string $lastName, string $firstName, string $phoneNumber){ // & avant la variable signifie que la fonction modifiera directement ton tableau original et non une copie.
-    if(empty($lastName) || empty($firstName) || empty($phoneNumber)){
-        return true;
+function addContact(array &$array, string $lastName, string $firstName, string $phoneNumber){ // & before your array means that it'll change the original array, not a copy.
+    if(empty($lastName) || empty($firstName) || empty($phoneNumber)){ // We check if our variables are
+        return false; //If it's the case, everything after a return is not working anymore
     }
 
     $newContact = [
@@ -193,7 +227,7 @@ function addContact(array &$array, string $lastName, string $firstName, string $
 
     $array[] = $newContact;
 
-    return false;
+    return true;
 };
 // -------------
 
@@ -206,13 +240,14 @@ function searchContact(array $array, string $index, string $content){
 };
 // --------------------
 
-// UPDATE A CONTACT 
+// UPDATE A CONTACT
 function updateContact(array &$array, int $index, array $newArray){
     if (isset($array[$index])){// Si le sous tableau de mon tableau est déclarée alors
         return $array[$index] = array_merge($array[$index], $newArray); //On remplace les anciennes données avec nos données dans le sous-tableau
     }
     return false;
 };
+// ----------------
 
 // DELETE CONTACT
 function deleteContact(array &$array, int $index){
@@ -223,13 +258,14 @@ function deleteContact(array &$array, int $index){
     }
     return false;
 }
+// --------------
 
-// EXEMPLE D'AJOUT DE CONTACT
+// EXAMPLE ADDING A CONTACT 
 
-// $lName = "Karrot";
-// $fName = "Parrow";
-// $pNumber = "01 02 03 04 05";
-// addContact($contacts, $lName, $fName, $pNumber);
+$lName = "Karrot";
+$fName = "Parrow";
+$pNumber = "01 02 03 04 05";
+addContact($contacts, $lName, $fName, $pNumber);
 
 // --------------------------
 
@@ -237,43 +273,43 @@ echo "<pre>";
 print_r($contacts);
 echo "</pre>";
 
-// EXEMPLE DE RECHERCHE DE CONTACT
+// EXAMPLE OF SEARCHING A CONTACT
 
-// $pNumber = "firstName";
-// $searchingByIE = "ie";
-// $resultSearchIE = searchContact($contacts, $pNumber, $searchingByIE);
+$searchingByIndex = "firstName";
+$searchingByLetter = "y";
+$resultSearch = searchContact($contacts, $searchingByIndex, $searchingByLetter);
 
-// echo "Tableau de recherche par \"ie\"";
-// echo "<pre>";
-// print_r($resultSearchIE);
-// echo "</pre>";
+echo "Tableau de recherche par ".$searchingByLetter." in " . $searchingByIndex;
+echo "<pre>";
+print_r($resultSearch);
+echo "</pre>";
 
 // ------------------------------- 
 
-// EXEMPLE DE MISE A JOUR DE CONTACT
+// EXAMPLE OF UPDATING A CONTACT
 
-// $indexArray = 1;
-// $newArrayUpdate =[
-//         "lastName" => "Poliove",
-//         "firstName" => "Arny",
-//         "phoneNumber" => "05 02 03 04 06",
-// ];
+$indexArray = 1; // Which contact we want to update
+$newArrayUpdate =[
+        "lastName" => "Poliove",
+        "firstName" => "Arny",
+        "phoneNumber" => "05 02 03 04 06",
+];
 
-// updateContact($contacts, $indexArray, $newArrayUpdate);
+updateContact($contacts, $indexArray, $newArrayUpdate);
 
-// echo "<pre>";
-// print_r($contacts);
-// echo "</pre>";
+echo "<pre>";
+print_r($contacts);
+echo "</pre>";
 
 // ---------------------------------
 
-// EXEMPLE DE SUPPRESSION DE CONTACT
+// EXAMPLE OF DELETING A CONTACT
 
-// $indexArray = 1;
+$indexArray = 1;
 
-// deleteContact($contacts, $indexArray);
-// echo "<pre>";
-// print_r($contacts);
-// echo "</pre>";
+deleteContact($contacts, $indexArray);
+echo "<pre>";
+print_r($contacts);
+echo "</pre>";
 
 // ---------------------------------

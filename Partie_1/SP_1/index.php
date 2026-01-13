@@ -1,11 +1,11 @@
 <?php
-// Installation et premiers pas
+// Installation and first steps
 
-// - [ X ]  Installation environnement (XAMPP/MAMP)
-// - [ X ]  Structure dossier (htdocs, www)
-// - [ X ]  Premier script "Hello World"
-// - [ X ]  Différence client/serveur
-// - [ X ]  **Exercice** : Créer une page qui affiche son nom et la date
+// - [ X ]  Installation environment (XAMPP/MAMP)
+// - [ X ]  File structure (htdocs, www)
+// - [ X ]  First script "Hello World"
+// - [ X ]  Difference client/server
+// - [ X ]  **Exercise** : Create an html that show a name and a date
 
 echo "Hello World";
 echo"<br>";
@@ -29,5 +29,5 @@ echo ">Ajourd'hui, nous le : ". $date."<br>";
 echo ">L'heure actuelle : ". $hour."<br>";
 echo "</p>";
 echo"<br>";
-// EXERICE :
-// Pour afficher sur une page, d'une autre manière : créer une page dédiée (page.php) et utiliser require_one("page.php")
+// EXERCISE :
+// Another method to display html/php : create an index.php and use require_once('homepage.php')

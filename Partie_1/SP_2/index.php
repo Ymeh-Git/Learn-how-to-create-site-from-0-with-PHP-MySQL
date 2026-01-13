@@ -1,17 +1,17 @@
 <?php
 // Variables et opérations
 
-// - [ X ]  Variables, constantes
-// - [ X ]  Types de données (string, integer, array...)
-// - [ X ]  Opérateurs (+, -, *, /, %, .)
-// - [ X ]  Concaténation
-// - [ X ]  **Exercice** : Calculateur simple (prix TTC, conversions)
+// - [ X ]  Variables, constants
+// - [ X ]  Data types (string, integer, array...)
+// - [ X ]  Operator (+, -, *, /, %, .)
+// - [ X ]  Concatenation
+// - [ X ]  **Exercise** : Simple calculator (Price including VAT, conversions)
 
-// Définir une variable
+// State your variable
 $variable;
-// Définir une constante
+// Define a constant
 const constante = "Etchebest";
-// OU
+// OR
 define("constante1", "Jérémy");
 
 $string = "Jérémy Etchebest";
@@ -62,13 +62,13 @@ $concatenation = $string . " aime le " . $array["loisir"];
 echo $concatenation;
 echo "<br>";
 
-// EXERCICE :
+// EXERCISE :
 
-$prixHT = 125; // Prix Hors Taxes
+$prixHT = 125; // Price excluding VAT
 
-$tva = 20; // Facile à utiliser en texte OU 0.2 (20 / 100)
+$tva = 20; // Easier to use it this way OR 0.2 (20 / 100)
 
-$prixTTC = $prixHT + ($prixHT * ($tva/100)); // Prix Toutes Taxes Comprises
+$prixTTC = $prixHT + ($prixHT * ($tva/100)); // Price including VAT
 
 echo "Prix Hors Taxes : ".$prixHT." €<br>
 Ajoutons-y la TVA de ".$tva." %<br>

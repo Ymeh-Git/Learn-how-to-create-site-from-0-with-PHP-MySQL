@@ -1,38 +1,38 @@
 <?php 
-// Formulaires HTML/PHP
+// Forms HTML/PHP
 
-// - [ X ]  Structure formulaire HTML
-// - [ X ]  Méthodes GET vs POST
-// - [ X ]  Récupération données ($_GET, $_POST)
-// - [ X ]  Validation basique
-// - [ X ]  **Mini Projet** : Formulaire de contact avec traitement
+// - [ X ] HTML Form Structure
+// - [ X ] GET vs. POST Methods
+// - [ X ] Data Retrieval ($_GET, $_POST)
+// - [ X ] Basic Validation
+// - [ X ] **Mini Project**: Contact Form with Processing
 
-// Structure formulaire HTML
+// HTML form structure
 
-// Voir page.php
+// See page.php
 
-// Méthodes GET vs POST
+// GET vs. POST methods
 
-// Méthode GET passe les valeurs de l'input dans l'URL, ce qui peut générer une faille de sécurité d'informations
-// Méthode POST données dans le corps du message, masquées, mais non cryptées
+// The GET method passes input values ​​in the URL, which can create a data security vulnerability.
+// The POST method places data in the message body, masked, but not encrypted.
 
-// Récupération données ($_GET, $_POST)
-// Plusieurs manières soit ici, soit reception.php
+// Data retrieval ($_GET, $_POST)
+// Several methods, either here or in reception.php
 
 $name = "";
 $email = "";
 $message = "";
 $emailNotGood = "";
 $success = false;
-// Une variable successMessage peut être initialisée et qui est vouée à changer selon l'étape (validation/envoi)
-// var_dump($_POST); // Pour voir les données envoyées
+// A variable `successMessage` can be initialized and is intended to change depending on the step (validation/submission)
+// var_dump($_POST); // Remove "//" To see the data sent
 
-if($_SERVER["REQUEST_METHOD"] == "POST"){
+if($_SERVER["REQUEST_METHOD"] == "POST"){ //We check that our form send datas by method="POST"
 
-    // Vérifier si les champs sont remplies (<input name="name">, ...)
+    // Check if the fields are filled in (<input name="name">, ...)
+    // Initialize $_POST[''] in each variables previously created
     if(isset($_POST['name'])){
-        // Les attribuers à notre variables créée au préalable
-        $name = htmlspecialchars($_POST['name']); // htmlspecialchars pour éviter les injections de codes malveillants
+        $name = htmlspecialchars($_POST['name']); // htmlspecialchars to avoid HTML balises injection
     }
 
     if(isset($_POST['email'])){
@@ -43,47 +43,47 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         $message = htmlspecialchars($_POST['message']);
     }
 
-    // Validation du mail
-    // Point pour plus tard, sans forcément vérifier la composition du mail(exemple@test.com)
-    // nous pourrions envoyer un mail de confirmation à l'adresse pour avoir accès à son compte.
+    // Email validation
+    // Point for later, without necessarily checking the email address (example@test.com)
+    //  We could send a confirmation email to the address to grant access to the account.
     if(!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)){
-        // Si l'email ne correspond pas au filtre, alors :
-        $emailNotGood = "L'adresse mail indiquée n'est pas valide";
-        // Les $_POST passeront sur l'affichage HTML avec ce message d'erreur, mais ne partiront pas en BDD !
+        // if email doesn't get filtered, that means it's not good enough
+        $emailNotGood = "Mail is invalid";
+        // $_POST can go though HTML but won't go into your DataBase (DB)
     } else {
-        // Ici nous enverrons nos données en BDD
-        // Envoie de mail etc... 
-        // **************************************************************************
-        // *******ATTENTION**********************************************************
-        // *******ATTENTION********* en localhost mail() ne fonctionnera pas ********
-        // *******ATTENTION**********************************************************
-        // **************************************************************************
+        // Here you can send datas into your DB if you want to
 
-        // Destinataire (moi)
-        $destinataire = "Jeremy.droulez@outlook.fr";
-        // Sujet (titre) du mail
-        $sujet = "Nouveau message de ".$name;
-        // Contenu du mail
+        // *****************************************************************
+        // *****************************************************************
+        // **************** localhost mail() doesn't work ******************
+        // *****************************************************************
+        // *****************************************************************
+
+        // Recipient (me)
+        $destinataire = "exemple@mail.fr"; //Enter your mail
+        // Title
+        $sujet = "New message from ".$name;
+        // Content
         $emailContent = "Nom : ".$name."\n";
         $emailContent .= "Email : ".$email."\n\n";
         $emailContent .= "Message : \n".$message;
 
         // From : 
-        $headers = "From: no-replay@votre-site.com\r\n";
+        $headers = "From: no-reply@your-site.com\r\n";
         // Reply-to :
         $headers .= "Reply-To: ". $email . "\r\n";
         // Gestion des accents
         $headers .= "Content-Type: text/plain; charset=\"utf-8\"\r\n";
 
-        // Envoi final : vérifions si les données valent true
+        // Check if variables are true
         if(mail($destinataire, $sujet, $emailContent, $headers)){
             $success = true;
-            // Vider les champs
+            // empty variables
             $name = "";
             $email = "";
             $message = "";
         } else{
-            $emailNotGood = "Une erreur est survenue lors de l'envoi de l'email.";
+            $emailNotGood = "An error occured while sending mail.";
         }
         
     }

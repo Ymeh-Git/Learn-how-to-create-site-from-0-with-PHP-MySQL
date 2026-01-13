@@ -24,13 +24,13 @@
                 <input type="text" id="name" name="name" value="<?php echo $_POST['name'];?>" disabled style="color:white;">
                 <label for="email">Votre email</label>
                 <input type="email" id="email" name="email" value="<?php echo $_POST['email'];?>" disabled style="color:white;">
-                <!-- Message d'erreur concernant le mail (validité/envoi) -->
+                <!-- Error message mail -->
                 <?php if ($emailNotGood): ?>
                     <div style="color: red; font-size: 0.9em;" class="danger">
                         <?php echo $emailNotGood; ?>
                     </div>
                 <?php endif; ?>
-                <!-- Envoi du mail avec succès -->
+                <!-- Mail sent with success -->
                 <?php if ($success): ?>
                     <div style="color: green;" class="success">
                         Votre message a été envoyé avec succès
