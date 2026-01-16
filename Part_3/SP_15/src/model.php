@@ -110,31 +110,6 @@ try{
     }
 }
 
-function setSession($email, $password){
-    $pdo = getPDO();
-    $sql = "SELECT * FROM users WHERE email = :email";
-    $statement = $pdo->prepare($sql); 
-    $statement->bindValue('email', $email, PDO::PARAM_STR);
-    $statement->execute();
-
-    $user = $statement->fetch(PDO::FETCH_ASSOC);
-
-    if($user && password_verify($password, $user['password'])){
-        $_SESSION['user'] = [
-            'id' => $user['id'],
-            'pseudo' => $user['pseudo'],
-            'email' => $user['email'],
-            'role' => $user['role'],
-        ];
-
-        header('location: main.php');
-
-        exit();
-    } else {
-        $message = "Identifiants incorrects...";
-    }
-}
-
 function adminDeleteAccount($id){
     $pdo = getPDO();
     $sql = "DELETE FROM users WHERE `users`.`id` = :id";
