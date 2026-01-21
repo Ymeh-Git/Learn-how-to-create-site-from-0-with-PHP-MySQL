@@ -83,7 +83,7 @@ $availableRoutes =
         'name' => 'adminProducts',
         'title' => 'ADMIN - Products',
         'css' => 'admin/products', 
-        'js' => 'script',
+        'js' => 'template/admin/products',
         'authorizeRole' => 'ADMIN',
     ],
  

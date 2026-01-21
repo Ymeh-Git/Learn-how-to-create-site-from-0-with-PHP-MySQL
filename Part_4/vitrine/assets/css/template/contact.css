@@ -1,15 +1,5 @@
 @import 'style.css';
 
-main{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-form{
-    background-color: transparent;
-    backdrop-filter: blur(7px);
-}
 
 .btn{
     text-decoration: none;

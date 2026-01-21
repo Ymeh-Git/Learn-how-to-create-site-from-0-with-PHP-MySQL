@@ -1,8 +1,8 @@
-<!-- 
-
-### **Part 4: PROJECT 1 - DYNAMIC SHOWCASE WEBSITE**
+# <p align=center>**Part 4: PROJECT 1 - DYNAMIC SHOWCASE WEBSITE**</p>
 
 **Objective:** Create a showcase website for a small business
+
+---
 
 ### **Project Specifications:**
 
@@ -16,32 +16,37 @@
 ### **Technical Structure:**
 
 ```
-/vitrine
-  /admin
-    login.php
-    dashboard.php
-    gestion_services.php
-  /assets
-    css/style.css
-    js/script.js
-    uploads/logo.jpg
-  /includes
-    database.php
-    functions.php
-  index.php
-  about.php
-  services.php
-  contact.php
+
+~vitrine/
+  |__admin/
+      |__login.php
+      |__dashboard.php
+      |__gestion_services.php
+  |__assets/
+      |__css/
+          |__style.css
+      |__js/
+          |__script.js
+  |__uploads/
+      |__logo.jpg
+  |__includes/
+      |__database.php
+      |__functions.php
+  |__index.php
+  |__about.php
+  |__services.php
+  |__contact.php
 
 ``` 
-This website will need 
 
-1- A slider, a way to show differents products / imgs within the same page
+### This website will need :
 
-2- About page, classic text page. Maybe add a link to a contact form (step 4)
+- 1- A **slider**, a way to show differents products / imgs within the same page
 
-3- We will need three tables :   
-  - users (admin)
+- 2- **About page**, classic text page. Maybe add a link to a contact form (step 4)
+
+- 3- We will need three tables :   
+  - **users (admin)**
     - id
     - firstName VARCHAR NULL
     - lastName VARCHAR NULL
@@ -49,23 +54,31 @@ This website will need
     - password VARCHAR
     - role VARCHAR (DEFAULT = "ADMIN")
 
-  - Services :
+  - **Services** 
     - id
     - name VARCHAR(255)
     - price INT (SMALLINT) // Depends on what you are selling, here range -32 768 to 32 768
 
-  - Products :
+  - **Products**
     - id
     - name VARCHAR(255)
     - price INT (SMALLINT)
     - img VARCHAR(255) // File path /assets/uploads/[...].ext
-    - reference // Maybe a code that goes by five letters and two numbers
+    - altImage // Sentence to describe image
+    - description // Product description
+    - reference // Maybe a code that goes by height letters
 
-4- A contact form, we will use Part 1 - SP_5 with function mail();
+- 4- A **contact form**, we will use Part 1 - SP_5 with function mail();
 
-5- An exclusive session for admins (something like that if(!($_SESSION['user']['mail'] == 'admin@site.fr')){header('location: error401.php')} )
-We need to make sure that every mail is unique, we can use it as a primary key.
+- 5- An **exclusive session for admins** 
+```
+if(!($_SESSION['user']['mail'] == 'admin@site.fr')){
 
-6- This means an ADMIN page where you can update datas
+  header('location: error401.php')
 
--->
+}
+```
+
+- 6- This means an **ADMIN pages** where you can use **CRUD** for every datas (Services/Products)
+
+<font color="red">⚠️ Front-end does not matter, **make it work first**, make it pretty after</font>

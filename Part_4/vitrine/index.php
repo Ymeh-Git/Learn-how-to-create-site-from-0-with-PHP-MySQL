@@ -13,6 +13,8 @@ if($authorizeRole == "ADMIN"){
         $js = "script";
     }
 }
+
+
 ?>
 
 
@@ -42,8 +44,8 @@ if($authorizeRole == "ADMIN"){
             <a href="index.php?route=admin/login" class="navBtn <?= ($nameOfRoute == "login") ? "active" : "" ?>">Log In</a>
             <?php endif;?>
             <?php if(isset($_SESSION['user']) && $_SESSION['user']['role'] == 'ADMIN') : ?>
-            <a href="index.php?route=admin/services" class="navBtn <?= ($nameOfRoute == "adminServices") ? "active" : "" ?> adminBtn">Admin - Services</a>
-            <a href="index.php?route=admin/products" class="navBtn <?= ($nameOfRoute == "adminProducts") ? "active" : "" ?> adminBtn">Admin - Products</a>
+            <a href="index.php?route=admin/services" class="navBtn <?= ($nameOfRoute == "adminServices") ? "active" : "" ?> adminBtn">Admin - ADD Services</a>
+            <a href="index.php?route=admin/products" class="navBtn <?= ($nameOfRoute == "adminProducts") ? "active" : "" ?> adminBtn">Admin - ADD Products</a>
             <a href="index.php?route=admin/dashboard" class="navBtn <?= ($nameOfRoute == "dashboard") ? "active" : "" ?> adminBtn">Admin - Dashboard</a>
             <a href="index.php?route=admin/logout" class="navBtn adminBtn logout">Log out</a>
             <?php endif?>

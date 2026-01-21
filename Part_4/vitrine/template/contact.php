@@ -4,8 +4,8 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
     $name = "";
     $email = "";
     $message = "";
-    $emailNotGood = "";
-    $success = false;
+    // $emailNotGood = "";
+    // $success = false;
     // A variable `successMessage` can be initialized and is intended to change depending on the step (validation/submission)
     // var_dump($_POST); // Remove "//" To see the data sent
 
@@ -30,7 +30,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
         //  We could send a confirmation email to the address to grant access to the account.
         if(!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)){
             // if email doesn't get filtered, that means it's not good enough
-            $emailNotGood = "Mail is invalid";
+            // $emailNotGood = "Mail is invalid";
             // $_POST can go though HTML but won't go into your DataBase (DB)
         } else {
             // Here you can send datas into your DB if you want to,
@@ -51,7 +51,6 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
 
         <label for="email">Email</label>
         <input type="email" id="email" name="email" required>
-        <input type="text" id="emailNotGood" name="emailNotGood" value="<?=$emailNotGood?>" hidden disabled>
         
         <label for="message">Message</label>
         <textarea type="text" id="message" name="message"></textarea>

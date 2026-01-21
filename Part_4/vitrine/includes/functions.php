@@ -144,23 +144,25 @@ function deleteService(){
 // --------
 
 // PRODUCTS
-function addProduct($name, $price, $img, $reference){
+function addProduct($name, $price, $description, $reference, $fileName, $altImage){
 
     $pdo = getPDO();
-    $sql = "INSERT INTO products (name, price, img, reference)
-            VALUES (:name, :price, :img, :reference)";
+
     // Prepared request
+    $sql = "INSERT INTO products (name, price, img, altImage, description, reference)
+            VALUES (:name, :price, :img, :altImage, :description, :reference)";
     $stmt = $pdo->prepare($sql);
 
     // Binding parameters
     $stmt->bindValue(":name", $name , PDO::PARAM_STR);
     $stmt->bindValue(":price", $price , PDO::PARAM_INT);
-    $stmt->bindValue(":img", $img , PDO::PARAM_STR);
+    $stmt->bindValue(":img", $fileName , PDO::PARAM_STR);
+    $stmt->bindValue(":altImage", $altImage , PDO::PARAM_STR);
+    $stmt->bindValue(":description", $description , PDO::PARAM_STR);
     $stmt->bindValue(":reference", $reference , PDO::PARAM_STR);
 
     // Execute request
-    $stmt->execute();
-
+    return $stmt->execute();
 }
 
 function getAllProducts(){
@@ -179,9 +181,15 @@ function updateProduct(){
     $pdo = getPDO();
 }
 
-function deleteProduct(){
+function deleteProduct($id){
+    $pdo = getPDO();
 
-    
+    $sql = "DELETE FROM products WHERE `id` = :id";
+    $stmt = $pdo->prepare($sql);
+
+    $stmt->bindValue(':id', $id, PDO::PARAM_INT);
+
+    $stmt->execute();
 }
 // --------
 
@@ -234,86 +242,83 @@ createSpecificAdminAccount();
 
 
 function uploadImage($file) {
-    $dossierStockage = __DIR__ . '/assets/uploads/'; // Dossier final
+
+    $dossierStockage = dirname(__DIR__) . '/assets/uploads/'; // Final file path
+
+    // IF /assets/uploads doesn't exist, then create it
+    if(!is_dir('assets/uploads')){
+        mkdir('assets/uploads', 0755, true); // (directory, permissions, recursive)
+    }
+
     $size = 2 * 1024 * 1024; // 2 Mo en octets
     
-    // Extensions autorisées (Whitelist)
+    // Allowed Extensions Whitelist)
     $allowedExtensions = ['jpg', 'jpeg', 'png', 'gif', 'webp'];
     
-    // Types MIME autorisés (Pour vérifier le contenu réel du fichier)
+    // Types MIME allowed
     $allowedMimes = ['image/jpeg', 'image/png', 'image/gif', 'image/webp'];
 
-    // 2. VÉRIFICATION DES ERREURS D'UPLOAD
+    // 2. Let's hope for no error
     if ($file['error'] !== 0) {
-        return "Transfer error (Code: " . $file['error'] . ")";
+        return [
+            'success' => false,
+            'error' => "Transfer error (Code: " . $file['error'] . ")"
+        ];
     }
 
-    // 3. VÉRIFICATION DE LA TAILLE
+    // 3. Check size
     if ($file['size'] > $size) {
-        return "The file is above limit (Max 2Mo).";
+        return [
+            'success' => false,
+            'error' => "The file is above limit (Max 2Mo)."
+        ];
     }
 
-    // 4. VÉRIFICATION DE L'EXTENSION ET DU TYPE MIME
-    // On récupère l'extension du fichier envoyé
+    // 4. Check extensions and type MIME
     // pathinfo(path, flags);
-    // flags spécifie l'élément retourné, ici l'extension
+    // flags specify returned extension
     $extension = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
 
-    // On vérifie si l'extension est dans notre liste
+    // check if $extension is in $allowedExtensions
     if (!in_array($extension, $allowedExtensions)) {
-        return "Only JPG, PNG, GIF and WEBP are allowed.";
+        return [
+            'success' => false,
+            'error' => "Only JPG, PNG, GIF and WEBP are allowed."
+        ];
     }
 
-    // Sécurité supplémentaire : On vérifie le TYPE MIME réel du fichier
-    // (Empêche de renommer un script .php en .jpg)
+    // Deny .ext changes
     $finfo = new finfo(FILEINFO_MIME_TYPE);
     $mimeType = $finfo->file($file['tmp_name']);
 
     if (!in_array($mimeType, $allowedMimes)) {
-        return "File corrupted or it is not a valid image.";
+        return [
+            'success' => false,
+            'error' => "File corrupted or it is not a valid image."
+        ];
     }
 
-    // 5. NETTOYAGE ET RENOMMAGE (CRUCIAL)
-    // On ne garde JAMAIS le nom d'origine (risque d'écrasement ou de piratage)
-    // On génère un nom unique : unique_id + extension
+    // 5. Clearing and rename it
     $newName = uniqid('img_', true) . '.' . $extension;
     
-    // Chemin final complet
+    // Final complete path
     $finalFilePath = $dossierStockage . $newName;
 
-    // 6. DÉPLACEMENT FINAL
-    // move_uploaded_file vérifie que c'est bien un fichier uploadé et le déplace
+    // 6. Final shift
+    // move_uploaded_file check if it's an uploaded file and then shift it
     if (move_uploaded_file($file['tmp_name'], $finalFilePath)) {
-        // SUCCÈS ! On retourne le chemin ou le nom du fichier pour la BDD
+        // Success, return filename or path for DB
         return [
             'success' => true,
             'filename' => $newName,
             'path' => $finalFilePath
         ];
     } else {
-        return "Error while saving file.";
+        return [
+            'success' => false,
+            'error' => "Error while saving file."
+        ];
     }
 }
 
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['avatar'])) {
-    
-    // Créer le dossier s'il n'existe pas
-    if (!is_dir('assets/uploads')) {
-        mkdir('assets/uploads', 0755, true);
-    }
-    
-    $result = uploadImage($_FILES['avatar']);
-
-    if (is_array($result) && $result['success']) {
-        echo "Upload as been a success ! Name : " . $result['filename'];
-
-        // Enregistrement vers la BDD
-        addProduct($result['filename']);
-        if(isset($_SESSION['user']) && $_SESSION['user']['role'] == "ADMIN"){header('location: index.php?route=dashboard');}
-        
-    } else {
-        echo "Erreur : " . $result;
-    }
-}
 ?>
