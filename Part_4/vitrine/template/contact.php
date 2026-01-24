@@ -1,4 +1,9 @@
 <?php 
+// If constant is not defined error 403 + exit().
+if (!defined('ACCESS_GRANTED')) {
+    http_response_code(403);
+    exit();
+}
 
 if($_SERVER['REQUEST_METHOD'] == "POST"){
     $name = "";
@@ -37,9 +42,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
             // This way we could manage, respond to mail in the website
             
         }
-
     }
-
 }
 ?>
 

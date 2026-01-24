@@ -144,7 +144,7 @@ function deleteService(){
 // --------
 
 // PRODUCTS
-function addProduct($name, $price, $description, $reference, $fileName, $altImage){
+function addProduct($name, $price, $description, $reference, $img, $altImage){
 
     $pdo = getPDO();
 
@@ -156,7 +156,7 @@ function addProduct($name, $price, $description, $reference, $fileName, $altImag
     // Binding parameters
     $stmt->bindValue(":name", $name , PDO::PARAM_STR);
     $stmt->bindValue(":price", $price , PDO::PARAM_INT);
-    $stmt->bindValue(":img", $fileName , PDO::PARAM_STR);
+    $stmt->bindValue(":img", $img , PDO::PARAM_STR);
     $stmt->bindValue(":altImage", $altImage , PDO::PARAM_STR);
     $stmt->bindValue(":description", $description , PDO::PARAM_STR);
     $stmt->bindValue(":reference", $reference , PDO::PARAM_STR);
@@ -175,10 +175,45 @@ function getAllProducts(){
     return $products;
 
 }
+function searchProductById($id){
+    $pdo = getPDO();
+    
+    $sql = "SELECT * FROM products WHERE id = :id";
+    $stmt = $pdo->prepare($sql);
 
-function updateProduct(){
+    $stmt->bindValue(':id', $id, PDO::PARAM_INT);
+
+    $stmt->execute();
+
+    $product= $stmt->fetch(PDO::FETCH_ASSOC);
+
+    return $product;
+}
+
+function updateProduct($id, $name, $price, $description, $reference, $img, $altImage){
 
     $pdo = getPDO();
+
+    $sql = "UPDATE products SET 
+            name = :name, 
+            price = :price,
+            img = :img,
+            altImage = :altImage,
+            description = :description,
+            reference = :reference
+            WHERE id = :id";
+
+    $stmt=$pdo->prepare($sql);
+    
+    $stmt->bindValue(':id', $id, PDO::PARAM_INT);
+    $stmt->bindValue(":name", $name, PDO::PARAM_STR);
+    $stmt->bindValue(":price", $price, PDO::PARAM_INT);
+    $stmt->bindValue(":description", $description, PDO::PARAM_STR);
+    $stmt->bindValue(":reference", $reference, PDO::PARAM_STR);
+    $stmt->bindValue(":img", $img, PDO::PARAM_STR);
+    $stmt->bindValue(":altImage", $altImage, PDO::PARAM_STR);
+
+    return $stmt->execute();
 }
 
 function deleteProduct($id){

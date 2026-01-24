@@ -1,6 +1,6 @@
 <?php 
 
-// Here to add a new route
+// How to add a new route
 // $availableRoutes = 
 // [
     // "filePath" => 
@@ -103,7 +103,7 @@ $availableRoutes =
         'name' => 'dashboard',
         'title' => 'ADMIN - Dashboard', 
         'css' => 'admin/dashboard',
-        'js' => 'script',
+        'js' => '',
         'authorizeRole' => 'ADMIN',
     ],
 
@@ -116,7 +116,16 @@ $availableRoutes =
         'js' => 'script',
         'authorizeRole' => 'ADMIN',
     ],
- 
+    
+    // Edit Product Page (admin)
+    'admin/update/editProduct' =>
+    [
+        'name' => 'editProduct',
+        'title' => 'Editing Product',
+        'css' => '',
+        'js' => 'template/admin/update/editProduct',
+        'authorizeRole' => 'ADMIN',
+    ],
 ];
 
 // $availableRoutes['home']['authorizeRole'] = '';

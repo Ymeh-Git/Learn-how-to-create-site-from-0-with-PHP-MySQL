@@ -1,3 +1,11 @@
+<?php
+// If constant is not defined error 403 + exit().
+if (!defined('ACCESS_GRANTED')) {
+    http_response_code(403);
+    exit();
+}
+
+?>
 <?php 
 $errorMessage = "";
 if($_SERVER['REQUEST_METHOD'] === "POST" && isset($_SESSION['user']) && $_SESSION['user']['role'] == "ADMIN" ){
@@ -8,8 +16,8 @@ if($_SERVER['REQUEST_METHOD'] === "POST" && isset($_SESSION['user']) && $_SESSIO
     $description = "";
     $reference = "";
     
-    $fileName = "missing_img.jpg";
-    $altImage = !(isset($_POST['altImage'])) ?  'No image available' : strip_tags($_POST['altImage']);
+    $img = "missing_img.jpg";
+    $altImage = 'No image available';
 
     $processForm = true;
 
@@ -25,7 +33,8 @@ if($_SERVER['REQUEST_METHOD'] === "POST" && isset($_SESSION['user']) && $_SESSIO
         $result = uploadImage($_FILES['avatar']);
 
         if($result['success'] === true){
-            $fileName = $result['filename'];
+            $img = $result['filename'];
+            $altImage = strip_tags($_POST['altImage']);
         } else {
             $errorMessage = $result['error'];
             $processForm =false;
@@ -33,7 +42,7 @@ if($_SERVER['REQUEST_METHOD'] === "POST" && isset($_SESSION['user']) && $_SESSIO
     }
 
     if($processForm){
-        $success = addProduct($name, $price, $description, $reference, $fileName, $altImage);
+        $success = addProduct($name, $price, $description, $reference, $img, $altImage);
 
         if($success){
             header('location: index.php?route=admin/dashboard');
@@ -83,5 +92,8 @@ if($_SERVER['REQUEST_METHOD'] === "POST" && isset($_SESSION['user']) && $_SESSIO
     <input type="text" name="reference" id="reference" maxlength="8" placeholder="RTFMCQFD"> 
     <div class="btn-field">
         <input type="submit" value="Add a product" id="submitBtn" class="btn btn-disabled" disabled>
+        <input type="reset" value="Reset" class="btn btn-red">
     </div>
 </form>
+<hr>
+<a href="index.php?route=admin/dashboard">Retour au dashboard</a>

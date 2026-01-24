@@ -1,0 +1,12 @@
+
+.productsAdmin, .servicesAdmin{
+    display: flex;
+    flex-direction: row;
+}
+
+.productName{
+    height: 50px;
+}
+.productDescription{
+    height: 150px;
+}
