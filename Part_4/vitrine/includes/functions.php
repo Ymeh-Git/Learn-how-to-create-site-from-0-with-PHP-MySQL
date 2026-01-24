@@ -228,6 +228,33 @@ function deleteProduct($id){
 }
 // --------
 
+// Mail
+
+function addContactForm(string $name, string $email, string $message){
+    $pdo = getPDO();
+
+    $sql = "INSERT INTO contact (name, email, message) 
+            VALUES (:name, :email, :message)";
+
+    $stmt = $pdo->prepare($sql);
+
+    $stmt->bindValue(':name', $name, PDO::PARAM_STR);
+    $stmt->bindValue(':email', $email, PDO::PARAM_STR);
+    $stmt->bindValue(':message', $message, PDO::PARAM_STR);
+
+    return $stmt->execute();
+}
+
+function getContactForm(){
+    $pdo = getPDO();
+
+    $sql = "SELECT * FROM contact";
+
+    $stmt = $pdo->query($sql);
+    $contactForms = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    return $contactForms;
+}
+// ----
 // Functions for Admin
 function lookingForSpecificAdmin(){
     try{

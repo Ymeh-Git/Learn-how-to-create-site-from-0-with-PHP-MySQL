@@ -9,17 +9,11 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
     $name = "";
     $email = "";
     $message = "";
-    // $emailNotGood = "";
-    // $success = false;
-    // A variable `successMessage` can be initialized and is intended to change depending on the step (validation/submission)
-    // var_dump($_POST); // Remove "//" To see the data sent
 
-    if($_SERVER["REQUEST_METHOD"] == "POST"){ //We check that our form send datas by method="POST"
+    if($_SERVER["REQUEST_METHOD"] == "POST"){ 
 
-        // Check if the fields are filled in (<input name="name">, ...)
-        // Initialize $_POST[''] in each variables previously created
         if(isset($_POST['name'])){
-            $name = htmlspecialchars($_POST['name']); // htmlspecialchars to avoid HTML balises injection
+            $name = htmlspecialchars($_POST['name']);
         }
 
         if(isset($_POST['email'])){
@@ -30,17 +24,18 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
             $message = htmlspecialchars($_POST['message']);
         }
 
-        // Email validation
-        // Point for later, without necessarily checking the email address (example@test.com)
-        //  We could send a confirmation email to the address to grant access to the account.
-        if(!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)){
-            // if email doesn't get filtered, that means it's not good enough
-            // $emailNotGood = "Mail is invalid";
-            // $_POST can go though HTML but won't go into your DataBase (DB)
-        } else {
-            // Here you can send datas into your DB if you want to,
-            // This way we could manage, respond to mail in the website
-            
+        // Here you can send datas into your DB if you want to,
+        // This way we could manage, respond to mail in the website
+        if($name !=="" && $email !=="" && $message !==""){
+            $success = addContactForm($name, $email, $message);
+            // HERE a simple table as been created (id, name, email, message) we could add a status that only an Admin could manage (read, answered, waiting) 
+            // depending on what status we could send an automatic email with mail();
+            // We could add a createdAt as well, this way we could weither notify Admin to read mails OR delete mail in DB if status = toBeDeleted
+            if($success){
+                // Show a text saying all good
+            } elseif(!$success){
+                // Show a text saying no good
+            }
         }
     }
 }

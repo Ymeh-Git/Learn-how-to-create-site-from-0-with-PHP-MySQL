@@ -6,6 +6,7 @@ if (!defined('ACCESS_GRANTED')) {
 }
 
 $products = getAllProducts();
+$contactForms = getContactForm();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_GET['action']) && $_GET['action'] == 'deletePostById' && isset($_POST['id'])) {
     
@@ -45,5 +46,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_GET['action']) && $_GET['ac
             </div>
         </div>
         <?php }?>
+    <?php }?>
+</section>
+
+<h2>Contacted By</h2>
+<section class="contactFormsAdmin">
+    <?php foreach($contactForms as $contactForm){?>
+    <div class="parent">
+        <h3>Sent by <?= $contactForm['name'];?></h3><br>
+        <p>Mail : <a href="mailto:<?= $contactForm['email'];?>"><?= $contactForm['email'];?></a></p>
+        <p>Message : <?= $contactForm['message'];?></p>
+    </div>
     <?php }?>
 </section>
