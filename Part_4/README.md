@@ -58,6 +58,7 @@
     - id,
     - name VARCHAR(255),
     - price INT (SMALLINT) // Depends on what you are selling, here range -32 768 to 32 768
+    - description TEXT
 
   - **Products**
     - id,
