@@ -100,3 +100,78 @@ img{
     align-items: center;
     text-align: center;
 }
+
+.slider-1{
+    width: 100%;
+    height: 500px;
+    /* 
+    To do top to bottom or bottom to top
+    heigth : 200px;
+    */
+    margin: 100px auto;
+    overflow: hidden;
+    border: 1px solid black;
+}
+
+.slider-1 .slider{
+    display: flex;
+    height: 100%;
+    animation: slider-1 12s infinite ease-in-out;
+    /* With flex-direct we can choose to do right to left or left to right BUT don't forget to change our animation slider-1 */
+    /* flex-direction: row-reverse;  */
+
+    /* 
+    
+    To do top to bottom or bottom to top
+    height: 100%;
+    animation: slider-1 12s infinite ease-in-out;
+    display: flex;
+    flex-direction: column-reverse (or column);
+    
+    */
+}
+
+.slider-1 p {
+    display: flex;
+    height: 100%;
+    background-color: black;
+    color: white;
+    flex-shrink: 0;
+    padding: 72px 0;
+    width: 100%;
+    font-size: 45px;
+    justify-content: center;
+    align-items: center;
+}
+/* 
+    5% for every transition
+
+    Since there is 4 transitions (20%), 100% - 20% = 80% for slides (pauses)
+
+    4 slides : 80% / 4 = 20% per slides
+*/
+@keyframes slider-1 {
+    /* 
+    To do top to bottom or bottom to top
+    Don't forget to change translateX to translateY
+    */
+    0%,
+    20%{
+        transform: translateX(0);
+    }
+    25%,
+    45%{
+        transform: translateX(-100%);
+    }
+    50%,
+    70%{
+        transform: translateX(-200%);
+    }
+    75%,
+    95%{
+        transform: translateX(-300%);
+    }
+    100%{
+        transform: translateX(-400%);
+    }
+}

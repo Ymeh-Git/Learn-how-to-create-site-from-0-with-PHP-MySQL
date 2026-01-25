@@ -54,7 +54,10 @@ if($authorizeRole == "ADMIN"){
             <?php endif?>
         </nav>
     </header>
-
+    <!-- Only in homepage, add "elseif" if you want to add sliders to differents pages or add a condition to this "if" to add the same slider -->
+    <?php if($page == 'home') :?>
+        <?php require "template/slider/sliderHome.php"?>
+    <?php endif;?>
     <!-- MAIN CONTENT -->
     <main>
         <?php require "template/" . $page . ".php"; ?>
