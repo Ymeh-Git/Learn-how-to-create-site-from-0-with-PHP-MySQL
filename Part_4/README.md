@@ -77,13 +77,6 @@
 - 4- A **contact form**, we will use Part 1 - SP_5 with function mail();
 
 - 5- An **exclusive session for admins** 
-```
-if(!($_SESSION['user']['mail'] == 'admin@site.fr')){
-
-  header('location: error401.php')
-
-}
-```
 
 - 6- This means an **ADMIN pages** where you can use **CRUD** for every datas (Services/Products)
 
