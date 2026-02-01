@@ -1,9 +1,11 @@
 <?php 
 
 class Post {
+    // db stuff
     private $conn;
     private $table = 'posts';
 
+    // class stuff
     public $id;
     public $category_id;
     public $category_name;
