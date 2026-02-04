@@ -17,6 +17,8 @@
         |__read.php
         |__update.php
     |__core
+        |__class
+            |__post.php
         |__initialize.php
     |__includes
         |__config.php
