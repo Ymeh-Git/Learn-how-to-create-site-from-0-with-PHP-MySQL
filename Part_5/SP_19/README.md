@@ -10,6 +10,12 @@
 ```
 
 ~PHPREST
+    |__api
+        |__create.php
+        |__delete.php
+        |__read_single.php
+        |__read.php
+        |__update.php
     |__core
         |__initialize.php
     |__includes
