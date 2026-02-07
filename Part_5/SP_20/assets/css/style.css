@@ -1,0 +1,90 @@
+*{
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+    color:white;
+}
+body{
+    background-color: rgb(73, 73, 73);
+}
+
+header{
+    height: 10vh;
+}
+
+main{
+    min-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: stretch;
+}
+
+footer{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+form, .form-input{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 50%;
+    height: 50%;
+    margin: auto;
+}
+
+.form-input label, .form-input input{
+    width: 100%;
+    text-align: start;
+}
+.form-input input{
+    color: black;
+}
+
+.message{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 25px;
+    background: transparent;
+    border: 2px solid black;
+    border-radius: 15px;
+    color: white;
+    width: 50%;
+    text-transform: uppercase;
+}
+
+.success_message{
+    border-color: green;
+    background-color: lightgreen;
+}
+
+.error_message{
+    border-color: red;
+    background-color: rgb(189, 84, 84);
+}
+
+.logout{
+    color: red;
+}
+
+.checkbox{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: stretch;
+    width: 100%;
+}
+.checkbox label{
+    width: 90%;
+}
+
+.checkbox input{
+    width: 10%;
+}
